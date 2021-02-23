@@ -10,9 +10,8 @@ app.post('/', (request, response) => {
   return response.json({message: "Mensagem salva"});
 });
 
-app.listen(port, '0.0.0.0', (error) => {
-  if(error){
-    return console.log(`Error try access server: ${error}`)
-  }
+app.listen(port, () => {
   return console.log(`Server is running in port: ${port}`);
+}).on('error', (err) =>{
+  return console.log(`Error when trying to start the server: ${err}`)
 });
