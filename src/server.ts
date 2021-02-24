@@ -1,19 +1,15 @@
 import express from 'express';
-
+import {router} from './routes';
+// Importing type-orm for use database
 import 'reflect-metadata';
 import "./database";
-
-const app = express() 
+// Basic setting to run the serve
+const app = express(); 
 const port = process.env.PORT || 3001;
-
-app.get('/users', (request, response) => {
-  return response.json({message: "Hello man"});
-});
-
-app.post('/', (request, response) => {
-  return response.json({message: "Mensagem salva"});
-});
-
+// Import routes and use routes
+app.use(express.json());
+app.use(router);
+// Started server
 app.listen(port, () => {
   return console.log(`Server is running in port: ${port}`);
 }).on('error', (err) =>{
