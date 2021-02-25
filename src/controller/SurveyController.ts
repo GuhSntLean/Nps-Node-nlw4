@@ -13,6 +13,12 @@ class SurveysController {
     await surveysRepositories.save(survey);
     return response.status(201).json(survey);
   }
+
+  async show(request:Request, response:Response){
+    const surveysRepositories = getCustomRepository(SurveysRepositories);
+    const all = await surveysRepositories.find();
+    return response.status(200).json(all);
+  }
 }
 
 export {SurveysController};
