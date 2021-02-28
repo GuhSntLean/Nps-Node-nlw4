@@ -1,6 +1,7 @@
 import { Request, response, Response } from 'express';
 import {resolve} from 'path';
 import { getCustomRepository } from 'typeorm';
+import { AppError } from '../errors/AppError';
 import { SurveysRepositories } from '../repositories/SurveysRepositories';
 import { SurveysUsersRepositories } from '../repositories/SurveysUsersRepositories';
 import { UsersRepositories } from '../repositories/UsersRepositories';
@@ -26,14 +27,10 @@ class SendMailController{
     });
 
     if(!userAlreadyExists) {
-      return response.sendStatus(400).json({
-        error: 'User does not exists'
-      });
+      throw new AppError('User does not exists');
     }
     if(!surveyAlreadyExists){
-      return response.sendStatus(400).json({
-        error: "Survey dows not exists"
-      });
+      throw new AppError("Survey dows not exists");
     }
     
     const variables = {
